@@ -1,6 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/hooks/use-toast";
 import shawarmaMain from "@/assets/shawarma-main.jpg";
 import miniShawarma from "@/assets/mini-shawarma.jpg";
 import burger from "@/assets/burger.jpg";
@@ -31,6 +33,17 @@ const menuItems = [
 ];
 
 const Menu = () => {
+  const { addItem } = useCart();
+  const { toast } = useToast();
+
+  const handleAddToCart = (item: { name: string; price: number; image: string }) => {
+    addItem(item);
+    toast({
+      title: "Added to cart!",
+      description: `${item.name} has been added to your cart.`,
+    });
+  };
+
   return (
     <section id="menu" className="py-20 bg-muted">
       <div className="container mx-auto px-4">
@@ -77,12 +90,10 @@ const Menu = () => {
                   <Button 
                     size="sm" 
                     className="bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow"
-                    asChild
+                    onClick={() => handleAddToCart({ name: item.name, price: item.price, image: item.image })}
                   >
-                    <a href={`https://wa.me/919876543210?text=Hi!%20I%20want%20to%20order%20${encodeURIComponent(item.name)}%20-%20₹${item.price}`} target="_blank" rel="noopener noreferrer">
-                      <ShoppingCart className="mr-1 h-4 w-4" />
-                      Add
-                    </a>
+                    <ShoppingCart className="mr-1 h-4 w-4" />
+                    Add
                   </Button>
                 </div>
               </CardContent>

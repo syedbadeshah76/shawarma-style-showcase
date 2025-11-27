@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Cart from "@/components/Cart";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -41,7 +42,7 @@ const Navbar = () => {
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -51,6 +52,7 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
+            <Cart />
             <Button 
               className="bg-primary hover:bg-primary-hover text-primary-foreground shadow-glow"
               asChild
@@ -85,15 +87,20 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <Button 
-                className="bg-primary hover:bg-primary-hover text-primary-foreground w-full shadow-glow"
-                asChild
-              >
-                <a href="tel:+919876543210">
-                  <Phone className="mr-2 h-4 w-4" />
-                  Order Now
-                </a>
-              </Button>
+              <div className="flex gap-2">
+                <div className="flex-1">
+                  <Cart />
+                </div>
+                <Button 
+                  className="bg-primary hover:bg-primary-hover text-primary-foreground flex-1 shadow-glow"
+                  asChild
+                >
+                  <a href="tel:+919876543210">
+                    <Phone className="mr-2 h-4 w-4" />
+                    Order Now
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         )}
