@@ -51,9 +51,14 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <Button className="bg-primary hover:bg-primary-hover text-primary-foreground shadow-glow">
-              <Phone className="mr-2 h-4 w-4" />
-              Order Now
+            <Button 
+              className="bg-primary hover:bg-primary-hover text-primary-foreground shadow-glow"
+              asChild
+            >
+              <a href="tel:+919876543210">
+                <Phone className="mr-2 h-4 w-4" />
+                Order Now
+              </a>
             </Button>
           </div>
 
@@ -80,9 +85,14 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <Button className="bg-primary hover:bg-primary-hover text-primary-foreground w-full shadow-glow">
-                <Phone className="mr-2 h-4 w-4" />
-                Order Now
+              <Button 
+                className="bg-primary hover:bg-primary-hover text-primary-foreground w-full shadow-glow"
+                asChild
+              >
+                <a href="tel:+919876543210">
+                  <Phone className="mr-2 h-4 w-4" />
+                  Order Now
+                </a>
               </Button>
             </div>
           </div>

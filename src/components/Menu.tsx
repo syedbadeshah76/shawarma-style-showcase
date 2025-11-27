@@ -77,9 +77,12 @@ const Menu = () => {
                   <Button 
                     size="sm" 
                     className="bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow"
+                    asChild
                   >
-                    <ShoppingCart className="mr-1 h-4 w-4" />
-                    Add
+                    <a href={`https://wa.me/919876543210?text=Hi!%20I%20want%20to%20order%20${encodeURIComponent(item.name)}%20-%20₹${item.price}`} target="_blank" rel="noopener noreferrer">
+                      <ShoppingCart className="mr-1 h-4 w-4" />
+                      Add
+                    </a>
                   </Button>
                 </div>
               </CardContent>

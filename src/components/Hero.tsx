@@ -36,15 +36,21 @@ const Hero = () => {
             <Button 
               size="lg" 
               className="bg-primary hover:bg-primary-hover text-primary-foreground text-lg px-8 py-6 shadow-glow hover:shadow-glow transition-all duration-300 hover:scale-105"
+              asChild
             >
-              Order Now
+              <a href="tel:+919876543210">
+                Order Now
+              </a>
             </Button>
             <Button 
               size="lg" 
               variant="outline"
               className="bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-accent text-lg px-8 py-6 transition-all duration-300 hover:scale-105"
+              asChild
             >
-              View Menu
+              <a href="#menu">
+                View Menu
+              </a>
             </Button>
           </div>
 
