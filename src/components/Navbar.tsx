@@ -36,7 +36,7 @@ const Navbar = () => {
           {/* Logo */}
           <a href="#home" className="flex items-center space-x-2">
             <div className="text-2xl md:text-3xl font-bold">
-              <span className="text-primary">AL-SHA</span>
+              <span className="text-primary">AL-SHAH</span>
               <span className="text-secondary"> SHAWARMA</span>
             </div>
           </a>

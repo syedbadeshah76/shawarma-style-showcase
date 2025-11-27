@@ -15,7 +15,7 @@ const Cart = () => {
       .join("%0A");
     
     const totalMessage = `%0A%0ATotal: ₹${total}`;
-    const whatsappUrl = `https://wa.me/919876543210?text=Hi!%20I%20want%20to%20order:%0A%0A${orderMessage}${totalMessage}`;
+    const whatsappUrl = `https://wa.me/918855888965?text=Hi!%20I%20want%20to%20order:%0A%0A${orderMessage}${totalMessage}`;
     
     window.open(whatsappUrl, "_blank");
     clearCart();

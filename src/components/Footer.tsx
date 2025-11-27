@@ -48,8 +48,8 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-lg mb-4">Contact</h4>
             <ul className="space-y-2 text-accent-foreground/80">
-              <li>123 Food Street</li>
-              <li>Mumbai, Maharashtra</li>
+              <li>Tappachabutra opp Naseeb Hotel </li>
+              <li>HYDERABAD, INDIA (500006)</li>
               <li>+91 98765 43210</li>
               <li>info@alshashawarma.com</li>
             </ul>
@@ -61,9 +61,9 @@ const Footer = () => {
           <p className="text-accent-foreground/60 text-sm">
             © {currentYear} AL-SHA SHAWARMA. All rights reserved.
           </p>
-          <p className="text-accent-foreground/60 text-sm">
+          {/* <p className="text-accent-foreground/60 text-sm">
             Designed by <span className="text-primary font-semibold">Syed Badeshah</span>
-          </p>
+          </p> */}
         </div>
       </div>
     </footer>

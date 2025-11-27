@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, ChevronDown, ChevronUp } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import shawarmaMain from "@/assets/shawarma-main.jpg";
@@ -35,8 +36,11 @@ const menuItems = [
 const Menu = () => {
   const { addItem } = useCart();
   const { toast } = useToast();
+  const [showAll, setShowAll] = useState(false);
 
-  const handleAddToCart = (item: { name: string; price: number; image: string }) => {
+  const visibleItems = showAll ? menuItems : menuItems.slice(0, 3);
+
+  const handleAddToCart = (item) => {
     addItem(item);
     toast({
       title: "Added to cart!",
@@ -56,17 +60,18 @@ const Menu = () => {
           </p>
         </div>
 
+        {/* GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {menuItems.map((item, index) => (
-            <Card 
-              key={index} 
+          {visibleItems.map((item, index) => (
+            <Card
+              key={index}
               className={`group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden ${
-                item.featured ? 'ring-2 ring-primary shadow-glow' : ''
+                item.featured ? "ring-2 ring-primary shadow-glow" : ""
               }`}
             >
               <div className="relative overflow-hidden h-48">
-                <img 
-                  src={item.image} 
+                <img
+                  src={item.image}
                   alt={item.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -75,22 +80,19 @@ const Menu = () => {
                     Popular
                   </div>
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-accent/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-              
+
               <CardContent className="p-4">
-                <h3 className="font-bold text-lg mb-2 text-foreground group-hover:text-primary transition-colors">
-                  {item.name}
-                </h3>
-                
+                <h3 className="font-bold text-lg mb-2">{item.name}</h3>
+
                 <div className="flex items-center justify-between">
                   <div className="text-2xl font-black text-primary">
                     ₹{item.price}
                   </div>
-                  <Button 
-                    size="sm" 
+                  <Button
+                    size="sm"
                     className="bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow"
-                    onClick={() => handleAddToCart({ name: item.name, price: item.price, image: item.image })}
+                    onClick={() => handleAddToCart(item)}
                   >
                     <ShoppingCart className="mr-1 h-4 w-4" />
                     Add
@@ -100,9 +102,20 @@ const Menu = () => {
             </Card>
           ))}
         </div>
+
+        {/* ARROW BUTTON */}
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="w-12 h-12 flex items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/80 transition"
+          >
+            {showAll ? <ChevronUp size={28} /> : <ChevronDown size={28} />}
+          </button>
+        </div>
       </div>
     </section>
   );
 };
 
 export default Menu;
+        

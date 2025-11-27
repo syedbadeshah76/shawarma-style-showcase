@@ -41,8 +41,9 @@ const Contact = () => {
                 <div>
                   <h3 className="font-bold text-lg mb-1">Visit Us</h3>
                   <p className="text-muted-foreground">
-                    123 Food Street, Near City Center<br />
-                    Mumbai, Maharashtra 400001
+                    Tappachabutra Road <br />
+                    opposite to Naseeb Hotel, <br />
+                    Hyderabad - 500006, India
                   </p>
                 </div>
               </CardContent>
@@ -104,7 +105,7 @@ const Contact = () => {
             <CardContent className="p-0 h-full">
               <div className="w-full h-full min-h-[500px] bg-muted flex items-center justify-center">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709657!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1621234567890!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28954.776390778872!2d78.4481416!3d17.3756871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb970011a9fdd3%3A0x9f96e063ffbecb41!2sAL%20SHAH%20SHAWARMA!5e1!3m2!1sen!2sin!4v1764238607566!5m2!1sen!2sin" 
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
