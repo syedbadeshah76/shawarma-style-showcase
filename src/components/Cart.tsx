@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
 const Cart = () => {
-  const { items, removeItem, updateQuantity, clearCart, total, itemCount, notes, setNotes } = useCart();
+  const { items, removeItem, updateQuantity, clearCart, total, itemCount, notes, setNotes, isCartOpen, setIsCartOpen } = useCart();
 
   const handleOrderNow = () => {
     if (items.length === 0) return;
@@ -25,7 +25,7 @@ const Cart = () => {
   };
 
   return (
-    <Sheet>
+    <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
       <SheetTrigger asChild>
         <Button variant="outline" size="icon" className="relative">
           <ShoppingCart className="h-5 w-5" />

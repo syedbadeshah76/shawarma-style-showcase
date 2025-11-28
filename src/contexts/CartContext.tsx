@@ -17,6 +17,8 @@ interface CartContextType {
   itemCount: number;
   notes: string;
   setNotes: (notes: string) => void;
+  isCartOpen: boolean;
+  setIsCartOpen: (open: boolean) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -24,6 +26,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<CartItem[]>([]);
   const [notes, setNotes] = useState<string>("");
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const addItem = (item: Omit<CartItem, "quantity">) => {
     setItems((prev) => {
@@ -71,6 +74,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         itemCount,
         notes,
         setNotes,
+        isCartOpen,
+        setIsCartOpen,
       }}
     >
       {children}
