@@ -4,6 +4,16 @@ import { Button } from "@/components/ui/button";
 import { ShoppingCart, ChevronDown, ChevronUp } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import shawarmaMain from "@/assets/shawarma-main.jpg";
 import miniShawarma from "@/assets/mini-shawarma.jpg";
 import burger from "@/assets/burger.jpg";
@@ -34,18 +44,27 @@ const menuItems = [
 ];
 
 const Menu = () => {
-  const { addItem } = useCart();
+  const { addItem, setIsCartOpen } = useCart();
   const { toast } = useToast();
   const [showAll, setShowAll] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
+  const [addedItemName, setAddedItemName] = useState("");
 
   const visibleItems = showAll ? menuItems : menuItems.slice(0, 3);
 
   const handleAddToCart = (item) => {
     addItem(item);
-    toast({
-      title: "Added to cart!",
-      description: `${item.name} has been added to your cart.`,
-    });
+    setAddedItemName(item.name);
+    setShowDialog(true);
+  };
+
+  const handleViewCart = () => {
+    setShowDialog(false);
+    setIsCartOpen(true);
+  };
+
+  const handleContinueShopping = () => {
+    setShowDialog(false);
   };
 
   return (
@@ -113,6 +132,25 @@ const Menu = () => {
           </button>
         </div>
       </div>
+
+      <AlertDialog open={showDialog} onOpenChange={setShowDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Item Added to Cart! 🎉</AlertDialogTitle>
+            <AlertDialogDescription>
+              {addedItemName} has been added to your cart. Would you like to proceed to cart or continue shopping?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={handleContinueShopping}>
+              Continue Shopping
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={handleViewCart} className="bg-primary hover:bg-primary/90">
+              View Cart
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </section>
   );
 };
