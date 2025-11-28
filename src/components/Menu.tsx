@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, ChevronDown, ChevronUp } from "lucide-react";
+import { ShoppingCart, ChevronDown, ChevronUp, Eye } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -14,6 +14,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
 import shawarmaMain from "@/assets/shawarma-main.jpg";
 import miniShawarma from "@/assets/mini-shawarma.jpg";
 import burger from "@/assets/burger.jpg";
@@ -23,24 +31,152 @@ import broasted from "@/assets/broasted.jpg";
 import momos from "@/assets/momos.jpg";
 
 const menuItems = [
-  { name: "Chicken Shawarma (R-Roti)", price: 100, image: shawarmaMain, featured: true },
-  { name: "Mini Chicken Shawarma (R-Roti)", price: 60, image: miniShawarma },
-  { name: "Spl Chicken Shawarma", price: 120, image: shawarmaMain, featured: true },
-  { name: "Mini Spl Chicken Shawarma", price: 100, image: miniShawarma },
-  { name: "Chicken Wrap", price: 100, image: wrap },
-  { name: "Mini Chicken Wrap", price: 70, image: wrap },
-  { name: "Broasted Chicken (1 pc)", price: 60, image: broasted },
-  { name: "Chicken Fried Momos", price: 90, image: momos },
-  { name: "Chicken Burger", price: 50, image: burger },
-  { name: "Chicken Sandwich", price: 45, image: burger },
-  { name: "French Fries", price: 60, image: fries },
-  { name: "Pizza", price: 80, image: burger },
-  { name: "Chicken Nuggets", price: 50, image: broasted },
-  { name: "Chicken Roll", price: 10, image: wrap },
-  { name: "Rumali Roti", price: 10, image: shawarmaMain },
-  { name: "Coffee", price: 20, image: fries },
-  { name: "Mocktails Juice", price: 60, image: fries },
-  { name: "Mayonnaise", price: 20, image: fries },
+  { 
+    name: "Chicken Shawarma (R-Roti)", 
+    price: 100, 
+    image: shawarmaMain, 
+    featured: true,
+    description: "Authentic Middle Eastern shawarma wrapped in soft rumali roti with tender marinated chicken, fresh vegetables, and our signature sauce.",
+    ingredients: "Chicken, Rumali Roti, Onions, Tomatoes, Cucumber, Lettuce, Mayonnaise, Special Sauce",
+    nutrition: { calories: 450, protein: "28g", carbs: "42g", fat: "18g" }
+  },
+  { 
+    name: "Mini Chicken Shawarma (R-Roti)", 
+    price: 60, 
+    image: miniShawarma,
+    description: "A smaller portion of our classic chicken shawarma, perfect for a light meal or snack.",
+    ingredients: "Chicken, Rumali Roti, Onions, Tomatoes, Cucumber, Lettuce, Mayonnaise, Special Sauce",
+    nutrition: { calories: 280, protein: "18g", carbs: "26g", fat: "11g" }
+  },
+  { 
+    name: "Spl Chicken Shawarma", 
+    price: 120, 
+    image: shawarmaMain, 
+    featured: true,
+    description: "Premium shawarma loaded with extra chicken, cheese, and special toppings for an unforgettable taste experience.",
+    ingredients: "Extra Chicken, Rumali Roti, Cheese, Onions, Tomatoes, Cucumber, Lettuce, Mayonnaise, Special Sauce, Extra Toppings",
+    nutrition: { calories: 580, protein: "38g", carbs: "48g", fat: "24g" }
+  },
+  { 
+    name: "Mini Spl Chicken Shawarma", 
+    price: 100, 
+    image: miniShawarma,
+    description: "Mini version of our special shawarma with all the premium ingredients in a compact size.",
+    ingredients: "Extra Chicken, Rumali Roti, Cheese, Onions, Tomatoes, Cucumber, Lettuce, Mayonnaise, Special Sauce",
+    nutrition: { calories: 380, protein: "24g", carbs: "32g", fat: "16g" }
+  },
+  { 
+    name: "Chicken Wrap", 
+    price: 100, 
+    image: wrap,
+    description: "Grilled chicken pieces wrapped with fresh vegetables and creamy sauce in a soft tortilla.",
+    ingredients: "Grilled Chicken, Tortilla Wrap, Lettuce, Tomatoes, Onions, Bell Peppers, Mayonnaise, Garlic Sauce",
+    nutrition: { calories: 420, protein: "26g", carbs: "38g", fat: "16g" }
+  },
+  { 
+    name: "Mini Chicken Wrap", 
+    price: 70, 
+    image: wrap,
+    description: "Smaller portion of our delicious chicken wrap, ideal for a quick bite.",
+    ingredients: "Grilled Chicken, Tortilla Wrap, Lettuce, Tomatoes, Onions, Bell Peppers, Mayonnaise, Garlic Sauce",
+    nutrition: { calories: 260, protein: "16g", carbs: "24g", fat: "10g" }
+  },
+  { 
+    name: "Broasted Chicken (1 pc)", 
+    price: 60, 
+    image: broasted,
+    description: "Crispy on the outside, juicy on the inside - our signature broasted chicken cooked to perfection.",
+    ingredients: "Chicken, Special Spice Mix, Cooking Oil",
+    nutrition: { calories: 320, protein: "22g", carbs: "8g", fat: "22g" }
+  },
+  { 
+    name: "Chicken Fried Momos", 
+    price: 90, 
+    image: momos,
+    description: "Steamed chicken momos pan-fried to golden perfection, served with spicy chutney.",
+    ingredients: "Chicken Mince, Momos Wrapper, Garlic, Ginger, Spring Onions, Soy Sauce, Spices",
+    nutrition: { calories: 340, protein: "20g", carbs: "36g", fat: "12g" }
+  },
+  { 
+    name: "Chicken Burger", 
+    price: 50, 
+    image: burger,
+    description: "Classic chicken burger with crispy patty, fresh lettuce, tomatoes, and our special sauce.",
+    ingredients: "Chicken Patty, Burger Bun, Lettuce, Tomato, Onion, Cheese, Mayonnaise, Ketchup",
+    nutrition: { calories: 380, protein: "22g", carbs: "42g", fat: "14g" }
+  },
+  { 
+    name: "Chicken Sandwich", 
+    price: 45, 
+    image: burger,
+    description: "Grilled chicken sandwich with fresh vegetables and creamy spread between soft bread slices.",
+    ingredients: "Grilled Chicken, Bread, Lettuce, Tomato, Cucumber, Cheese, Mayonnaise",
+    nutrition: { calories: 320, protein: "20g", carbs: "36g", fat: "11g" }
+  },
+  { 
+    name: "French Fries", 
+    price: 60, 
+    image: fries,
+    description: "Crispy golden french fries seasoned with our special spice blend.",
+    ingredients: "Potatoes, Vegetable Oil, Salt, Seasoning",
+    nutrition: { calories: 365, protein: "4g", carbs: "48g", fat: "17g" }
+  },
+  { 
+    name: "Pizza", 
+    price: 80, 
+    image: burger,
+    description: "Personal-sized pizza with your choice of toppings and gooey melted cheese.",
+    ingredients: "Pizza Dough, Tomato Sauce, Mozzarella Cheese, Toppings (varies)",
+    nutrition: { calories: 480, protein: "18g", carbs: "58g", fat: "18g" }
+  },
+  { 
+    name: "Chicken Nuggets", 
+    price: 50, 
+    image: broasted,
+    description: "Bite-sized chicken nuggets, crispy outside and tender inside, perfect for kids and adults.",
+    ingredients: "Chicken Breast, Breadcrumbs, Flour, Eggs, Spices, Cooking Oil",
+    nutrition: { calories: 290, protein: "16g", carbs: "24g", fat: "14g" }
+  },
+  { 
+    name: "Chicken Roll", 
+    price: 10, 
+    image: wrap,
+    description: "Quick snack roll filled with spiced chicken and wrapped in soft roti.",
+    ingredients: "Chicken, Roti, Onions, Spices",
+    nutrition: { calories: 120, protein: "8g", carbs: "14g", fat: "4g" }
+  },
+  { 
+    name: "Rumali Roti", 
+    price: 10, 
+    image: shawarmaMain,
+    description: "Thin, soft handkerchief bread perfect as a side or to wrap your favorite filling.",
+    ingredients: "Wheat Flour, Water, Salt, Oil",
+    nutrition: { calories: 80, protein: "2g", carbs: "16g", fat: "1g" }
+  },
+  { 
+    name: "Coffee", 
+    price: 20, 
+    image: fries,
+    description: "Freshly brewed hot coffee to energize your day.",
+    ingredients: "Coffee Beans, Water, Sugar (optional), Milk (optional)",
+    nutrition: { calories: 5, protein: "0g", carbs: "1g", fat: "0g" }
+  },
+  { 
+    name: "Mocktails Juice", 
+    price: 60, 
+    image: fries,
+    description: "Refreshing mocktail made with fresh fruits and premium ingredients.",
+    ingredients: "Fresh Fruits, Sugar Syrup, Soda, Ice, Mint",
+    nutrition: { calories: 140, protein: "1g", carbs: "35g", fat: "0g" }
+  },
+  { 
+    name: "Mayonnaise", 
+    price: 20, 
+    image: fries,
+    description: "Extra serving of our creamy mayonnaise sauce.",
+    ingredients: "Eggs, Oil, Vinegar, Salt, Sugar",
+    nutrition: { calories: 180, protein: "1g", carbs: "2g", fat: "20g" }
+  },
 ];
 
 const Menu = () => {
@@ -49,6 +185,7 @@ const Menu = () => {
   const [showAll, setShowAll] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [addedItemName, setAddedItemName] = useState("");
+  const [selectedItem, setSelectedItem] = useState<typeof menuItems[0] | null>(null);
 
   const visibleItems = showAll ? menuItems : menuItems.slice(0, 3);
 
@@ -104,19 +241,28 @@ const Menu = () => {
               <CardContent className="p-4">
                 <h3 className="font-bold text-lg mb-2">{item.name}</h3>
 
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mb-2">
                   <div className="text-2xl font-black text-primary">
                     ₹{item.price}
                   </div>
                   <Button
+                    variant="ghost"
                     size="sm"
-                    className="bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow"
-                    onClick={() => handleAddToCart(item)}
+                    onClick={() => setSelectedItem(item)}
                   >
-                    <ShoppingCart className="mr-1 h-4 w-4" />
-                    Add
+                    <Eye className="h-4 w-4 mr-1" />
+                    Quick View
                   </Button>
                 </div>
+
+                <Button
+                  size="sm"
+                  className="w-full bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow"
+                  onClick={() => handleAddToCart(item)}
+                >
+                  <ShoppingCart className="mr-1 h-4 w-4" />
+                  Add to Cart
+                </Button>
               </CardContent>
             </Card>
           ))}
@@ -151,6 +297,86 @@ const Menu = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      <Dialog open={!!selectedItem} onOpenChange={() => setSelectedItem(null)}>
+        <DialogContent className="max-w-2xl">
+          {selectedItem && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-2xl">{selectedItem.name}</DialogTitle>
+                <DialogDescription className="text-base mt-2">
+                  {selectedItem.description}
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="grid gap-4 mt-4">
+                <div className="relative h-64 rounded-lg overflow-hidden">
+                  <img
+                    src={selectedItem.image}
+                    alt={selectedItem.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold text-lg mb-2 flex items-center gap-2">
+                      <span className="text-primary">🥘</span> Ingredients
+                    </h4>
+                    <p className="text-muted-foreground">{selectedItem.ingredients}</p>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold text-lg mb-2 flex items-center gap-2">
+                      <span className="text-primary">📊</span> Nutritional Information
+                    </h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      <Badge variant="secondary" className="justify-center py-2">
+                        <div className="text-center">
+                          <div className="font-bold">{selectedItem.nutrition.calories}</div>
+                          <div className="text-xs">Calories</div>
+                        </div>
+                      </Badge>
+                      <Badge variant="secondary" className="justify-center py-2">
+                        <div className="text-center">
+                          <div className="font-bold">{selectedItem.nutrition.protein}</div>
+                          <div className="text-xs">Protein</div>
+                        </div>
+                      </Badge>
+                      <Badge variant="secondary" className="justify-center py-2">
+                        <div className="text-center">
+                          <div className="font-bold">{selectedItem.nutrition.carbs}</div>
+                          <div className="text-xs">Carbs</div>
+                        </div>
+                      </Badge>
+                      <Badge variant="secondary" className="justify-center py-2">
+                        <div className="text-center">
+                          <div className="font-bold">{selectedItem.nutrition.fat}</div>
+                          <div className="text-xs">Fat</div>
+                        </div>
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 pt-4 border-t">
+                  <div className="text-3xl font-black text-primary">₹{selectedItem.price}</div>
+                  <Button
+                    className="flex-1 bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow"
+                    onClick={() => {
+                      handleAddToCart(selectedItem);
+                      setSelectedItem(null);
+                    }}
+                  >
+                    <ShoppingCart className="mr-2 h-5 w-5" />
+                    Add to Cart
+                  </Button>
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
