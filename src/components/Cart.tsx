@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { ShoppingCart, Trash2, Plus, Minus } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { Badge } from "@/components/ui/badge";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
 const Cart = () => {
-  const { items, removeItem, updateQuantity, clearCart, total, itemCount } = useCart();
+  const { items, removeItem, updateQuantity, clearCart, total, itemCount, notes, setNotes } = useCart();
 
   const handleOrderNow = () => {
     if (items.length === 0) return;
@@ -15,7 +17,8 @@ const Cart = () => {
       .join("%0A");
     
     const totalMessage = `%0A%0ATotal: ₹${total}`;
-    const whatsappUrl = `https://wa.me/918855888965?text=Hi!%20I%20want%20to%20order:%0A%0A${orderMessage}${totalMessage}`;
+    const notesMessage = notes.trim() ? `%0A%0ASpecial Instructions:%0A${encodeURIComponent(notes)}` : "";
+    const whatsappUrl = `https://wa.me/918855888965?text=Hi!%20I%20want%20to%20order:%0A%0A${orderMessage}${totalMessage}${notesMessage}`;
     
     window.open(whatsappUrl, "_blank");
     clearCart();
@@ -96,6 +99,19 @@ const Cart = () => {
 
         {items.length > 0 && (
           <div className="absolute bottom-0 left-0 right-0 p-6 bg-background border-t">
+            <div className="mb-4">
+              <Label htmlFor="special-notes" className="text-sm font-medium mb-2 block">
+                Special Instructions (Optional)
+              </Label>
+              <Textarea
+                id="special-notes"
+                placeholder="Any special requests? (e.g., extra spicy, no onions, etc.)"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                className="min-h-[60px] resize-none"
+                maxLength={200}
+              />
+            </div>
             <div className="flex items-center justify-between mb-4">
               <span className="text-xl font-bold">Total:</span>
               <span className="text-2xl font-black text-primary">₹{total}</span>
