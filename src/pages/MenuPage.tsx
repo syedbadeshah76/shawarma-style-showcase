@@ -449,7 +449,7 @@ const MenuPage = () => {
       </AlertDialog>
 
       <Dialog open={!!selectedItem} onOpenChange={() => setSelectedItem(null)}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           {selectedItem && (
             <>
               <DialogHeader>
@@ -460,7 +460,7 @@ const MenuPage = () => {
               </DialogHeader>
 
               <div className="grid gap-4 mt-4">
-                <div className="relative h-64 rounded-lg overflow-hidden">
+                <div className="relative h-48 sm:h-64 rounded-lg overflow-hidden flex-shrink-0">
                   <img
                     src={selectedItem.image}
                     alt={selectedItem.name}
@@ -473,35 +473,35 @@ const MenuPage = () => {
                     <h4 className="font-semibold text-lg mb-2 flex items-center gap-2">
                       <span className="text-primary">🥘</span> Ingredients
                     </h4>
-                    <p className="text-muted-foreground">{selectedItem.ingredients}</p>
+                    <p className="text-muted-foreground text-sm sm:text-base">{selectedItem.ingredients}</p>
                   </div>
 
                   <div>
                     <h4 className="font-semibold text-lg mb-2 flex items-center gap-2">
                       <span className="text-primary">📊</span> Nutritional Information
                     </h4>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                       <Badge variant="secondary" className="justify-center py-2">
                         <div className="text-center">
-                          <div className="font-bold">{selectedItem.nutrition.calories}</div>
+                          <div className="font-bold text-sm">{selectedItem.nutrition.calories}</div>
                           <div className="text-xs">Calories</div>
                         </div>
                       </Badge>
                       <Badge variant="secondary" className="justify-center py-2">
                         <div className="text-center">
-                          <div className="font-bold">{selectedItem.nutrition.protein}</div>
+                          <div className="font-bold text-sm">{selectedItem.nutrition.protein}</div>
                           <div className="text-xs">Protein</div>
                         </div>
                       </Badge>
                       <Badge variant="secondary" className="justify-center py-2">
                         <div className="text-center">
-                          <div className="font-bold">{selectedItem.nutrition.carbs}</div>
+                          <div className="font-bold text-sm">{selectedItem.nutrition.carbs}</div>
                           <div className="text-xs">Carbs</div>
                         </div>
                       </Badge>
                       <Badge variant="secondary" className="justify-center py-2">
                         <div className="text-center">
-                          <div className="font-bold">{selectedItem.nutrition.fat}</div>
+                          <div className="font-bold text-sm">{selectedItem.nutrition.fat}</div>
                           <div className="text-xs">Fat</div>
                         </div>
                       </Badge>
@@ -509,8 +509,8 @@ const MenuPage = () => {
                   </div>
                 </div>
 
-                <div className="flex gap-3 pt-4 border-t">
-                  <div className="text-3xl font-black text-primary">₹{selectedItem.price}</div>
+                <div className="flex gap-3 pt-4 border-t sticky bottom-0 bg-background pb-2">
+                  <div className="text-2xl sm:text-3xl font-black text-primary">₹{selectedItem.price}</div>
                   <Button
                     className="flex-1 bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow"
                     onClick={() => {
