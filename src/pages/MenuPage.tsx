@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
-import { ShoppingCart, ChevronDown, ChevronUp, Eye, Leaf, Flame, Star, Search } from "lucide-react";
+import { ShoppingCart, ChevronDown, ChevronUp, Eye, Leaf, Flame, Star, Search, Clock, X } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -231,9 +231,41 @@ const MenuPage = () => {
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [priceRange, setPriceRange] = useState<number[]>([0, 150]);
+  const [recentlyViewed, setRecentlyViewed] = useState<typeof menuItems>([]);
 
   const minPrice = 0;
   const maxPrice = 150;
+
+  // Load recently viewed from localStorage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem("recentlyViewedItems");
+    if (stored) {
+      try {
+        const parsedNames = JSON.parse(stored) as string[];
+        const items = parsedNames
+          .map(name => menuItems.find(item => item.name === name))
+          .filter(Boolean) as typeof menuItems;
+        setRecentlyViewed(items);
+      } catch (e) {
+        console.error("Error parsing recently viewed items", e);
+      }
+    }
+  }, []);
+
+  // Track item view
+  const trackItemView = (item: typeof menuItems[0]) => {
+    setRecentlyViewed(prev => {
+      const filtered = prev.filter(i => i.name !== item.name);
+      const updated = [item, ...filtered].slice(0, 6); // Keep max 6 items
+      localStorage.setItem("recentlyViewedItems", JSON.stringify(updated.map(i => i.name)));
+      return updated;
+    });
+  };
+
+  const clearRecentlyViewed = () => {
+    setRecentlyViewed([]);
+    localStorage.removeItem("recentlyViewedItems");
+  };
 
   const filteredItems = menuItems.filter((item) => {
     const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -338,6 +370,50 @@ const MenuPage = () => {
             </div>
           </div>
 
+          {/* RECENTLY VIEWED SECTION */}
+          {recentlyViewed.length > 0 && (
+            <div className="mb-10">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
+                  <Clock className="h-5 w-5 text-primary" />
+                  Recently Viewed
+                </h2>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={clearRecentlyViewed}
+                  className="text-muted-foreground hover:text-destructive"
+                >
+                  <X className="h-4 w-4 mr-1" />
+                  Clear
+                </Button>
+              </div>
+              <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+                {recentlyViewed.map((item, index) => (
+                  <Card
+                    key={index}
+                    className="flex-shrink-0 w-48 group hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden"
+                    onClick={() => {
+                      setSelectedItem(item);
+                    }}
+                  >
+                    <div className="relative h-28 overflow-hidden">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <CardContent className="p-3">
+                      <h4 className="font-semibold text-sm line-clamp-1">{item.name}</h4>
+                      <p className="text-primary font-bold">₹{item.price}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Results count */}
           {searchQuery && (
             <p className="text-center text-muted-foreground mb-6">
@@ -389,7 +465,10 @@ const MenuPage = () => {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => setSelectedItem(item)}
+                      onClick={() => {
+                        setSelectedItem(item);
+                        trackItemView(item);
+                      }}
                     >
                       <Eye className="h-4 w-4 mr-1" />
                       Quick View
