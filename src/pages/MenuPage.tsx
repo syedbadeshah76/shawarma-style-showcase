@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
-import { ShoppingCart, ChevronDown, ChevronUp, Eye, Leaf, Flame, Star, Search, Clock, X, ArrowUpDown, Minus, Plus } from "lucide-react";
+import { ShoppingCart, ChevronDown, ChevronUp, Eye, Leaf, Flame, Star, Search, Clock, X, ArrowUpDown, Minus, Plus, Timer } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -51,6 +51,7 @@ const menuItems = [
     featured: true,
     isVegetarian: false,
     isSpicy: true,
+    prepTime: "10-12",
     description: "Authentic Middle Eastern shawarma wrapped in soft rumali roti with tender marinated chicken, fresh vegetables, and our signature sauce.",
     ingredients: "Chicken, Rumali Roti, Onions, Tomatoes, Cucumber, Lettuce, Mayonnaise, Special Sauce",
     nutrition: { calories: 450, protein: "28g", carbs: "42g", fat: "18g" }
@@ -61,6 +62,7 @@ const menuItems = [
     image: miniShawarma,
     isVegetarian: false,
     isSpicy: true,
+    prepTime: "8-10",
     description: "A smaller portion of our classic chicken shawarma, perfect for a light meal or snack.",
     ingredients: "Chicken, Rumali Roti, Onions, Tomatoes, Cucumber, Lettuce, Mayonnaise, Special Sauce",
     nutrition: { calories: 280, protein: "18g", carbs: "26g", fat: "11g" }
@@ -72,6 +74,7 @@ const menuItems = [
     featured: true,
     isVegetarian: false,
     isSpicy: true,
+    prepTime: "12-15",
     description: "Premium shawarma loaded with extra chicken, cheese, and special toppings for an unforgettable taste experience.",
     ingredients: "Extra Chicken, Rumali Roti, Cheese, Onions, Tomatoes, Cucumber, Lettuce, Mayonnaise, Special Sauce, Extra Toppings",
     nutrition: { calories: 580, protein: "38g", carbs: "48g", fat: "24g" }
@@ -82,6 +85,7 @@ const menuItems = [
     image: miniShawarma,
     isVegetarian: false,
     isSpicy: true,
+    prepTime: "10-12",
     description: "Mini version of our special shawarma with all the premium ingredients in a compact size.",
     ingredients: "Extra Chicken, Rumali Roti, Cheese, Onions, Tomatoes, Cucumber, Lettuce, Mayonnaise, Special Sauce",
     nutrition: { calories: 380, protein: "24g", carbs: "32g", fat: "16g" }
@@ -92,6 +96,7 @@ const menuItems = [
     image: wrap,
     isVegetarian: false,
     isSpicy: false,
+    prepTime: "8-10",
     description: "Grilled chicken pieces wrapped with fresh vegetables and creamy sauce in a soft tortilla.",
     ingredients: "Grilled Chicken, Tortilla Wrap, Lettuce, Tomatoes, Onions, Bell Peppers, Mayonnaise, Garlic Sauce",
     nutrition: { calories: 420, protein: "26g", carbs: "38g", fat: "16g" }
@@ -102,6 +107,7 @@ const menuItems = [
     image: wrap,
     isVegetarian: false,
     isSpicy: false,
+    prepTime: "6-8",
     description: "Smaller portion of our delicious chicken wrap, ideal for a quick bite.",
     ingredients: "Grilled Chicken, Tortilla Wrap, Lettuce, Tomatoes, Onions, Bell Peppers, Mayonnaise, Garlic Sauce",
     nutrition: { calories: 260, protein: "16g", carbs: "24g", fat: "10g" }
@@ -113,6 +119,7 @@ const menuItems = [
     featured: true,
     isVegetarian: false,
     isSpicy: false,
+    prepTime: "15-18",
     description: "Crispy on the outside, juicy on the inside - our signature broasted chicken cooked to perfection.",
     ingredients: "Chicken, Special Spice Mix, Cooking Oil",
     nutrition: { calories: 320, protein: "22g", carbs: "8g", fat: "22g" }
@@ -123,6 +130,7 @@ const menuItems = [
     image: momos,
     isVegetarian: false,
     isSpicy: true,
+    prepTime: "12-15",
     description: "Steamed chicken momos pan-fried to golden perfection, served with spicy chutney.",
     ingredients: "Chicken Mince, Momos Wrapper, Garlic, Ginger, Spring Onions, Soy Sauce, Spices",
     nutrition: { calories: 340, protein: "20g", carbs: "36g", fat: "12g" }
@@ -133,6 +141,7 @@ const menuItems = [
     image: burger,
     isVegetarian: false,
     isSpicy: false,
+    prepTime: "8-10",
     description: "Classic chicken burger with crispy patty, fresh lettuce, tomatoes, and our special sauce.",
     ingredients: "Chicken Patty, Burger Bun, Lettuce, Tomato, Onion, Cheese, Mayonnaise, Ketchup",
     nutrition: { calories: 380, protein: "22g", carbs: "42g", fat: "14g" }
@@ -143,6 +152,7 @@ const menuItems = [
     image: burger,
     isVegetarian: false,
     isSpicy: false,
+    prepTime: "5-7",
     description: "Grilled chicken sandwich with fresh vegetables and creamy spread between soft bread slices.",
     ingredients: "Grilled Chicken, Bread, Lettuce, Tomato, Cucumber, Cheese, Mayonnaise",
     nutrition: { calories: 320, protein: "20g", carbs: "36g", fat: "11g" }
@@ -153,6 +163,7 @@ const menuItems = [
     image: fries,
     isVegetarian: true,
     isSpicy: false,
+    prepTime: "5-7",
     description: "Crispy golden french fries seasoned with our special spice blend.",
     ingredients: "Potatoes, Vegetable Oil, Salt, Seasoning",
     nutrition: { calories: 365, protein: "4g", carbs: "48g", fat: "17g" }
@@ -163,6 +174,7 @@ const menuItems = [
     image: burger,
     isVegetarian: true,
     isSpicy: false,
+    prepTime: "15-20",
     description: "Personal-sized pizza with your choice of toppings and gooey melted cheese.",
     ingredients: "Pizza Dough, Tomato Sauce, Mozzarella Cheese, Toppings (varies)",
     nutrition: { calories: 480, protein: "18g", carbs: "58g", fat: "18g" }
@@ -173,6 +185,7 @@ const menuItems = [
     image: broasted,
     isVegetarian: false,
     isSpicy: false,
+    prepTime: "8-10",
     description: "Bite-sized chicken nuggets, crispy outside and tender inside, perfect for kids and adults.",
     ingredients: "Chicken Breast, Breadcrumbs, Flour, Eggs, Spices, Cooking Oil",
     nutrition: { calories: 290, protein: "16g", carbs: "24g", fat: "14g" }
@@ -183,6 +196,7 @@ const menuItems = [
     image: wrap,
     isVegetarian: false,
     isSpicy: true,
+    prepTime: "3-5",
     description: "Quick snack roll filled with spiced chicken and wrapped in soft roti.",
     ingredients: "Chicken, Roti, Onions, Spices",
     nutrition: { calories: 120, protein: "8g", carbs: "14g", fat: "4g" }
@@ -193,6 +207,7 @@ const menuItems = [
     image: shawarmaMain,
     isVegetarian: true,
     isSpicy: false,
+    prepTime: "2-3",
     description: "Thin, soft handkerchief bread perfect as a side or to wrap your favorite filling.",
     ingredients: "Wheat Flour, Water, Salt, Oil",
     nutrition: { calories: 80, protein: "2g", carbs: "16g", fat: "1g" }
@@ -203,6 +218,7 @@ const menuItems = [
     image: fries,
     isVegetarian: true,
     isSpicy: false,
+    prepTime: "3-5",
     description: "Freshly brewed hot coffee to energize your day.",
     ingredients: "Coffee Beans, Water, Sugar (optional), Milk (optional)",
     nutrition: { calories: 5, protein: "0g", carbs: "1g", fat: "0g" }
@@ -213,6 +229,7 @@ const menuItems = [
     image: fries,
     isVegetarian: true,
     isSpicy: false,
+    prepTime: "5-7",
     description: "Refreshing mocktail made with fresh fruits and premium ingredients.",
     ingredients: "Fresh Fruits, Sugar Syrup, Soda, Ice, Mint",
     nutrition: { calories: 140, protein: "1g", carbs: "35g", fat: "0g" }
@@ -223,6 +240,7 @@ const menuItems = [
     image: fries,
     isVegetarian: true,
     isSpicy: false,
+    prepTime: "1-2",
     description: "Extra serving of our creamy mayonnaise sauce.",
     ingredients: "Eggs, Oil, Vinegar, Salt, Sugar",
     nutrition: { calories: 180, protein: "1g", carbs: "2g", fat: "20g" }
@@ -498,7 +516,12 @@ const MenuPage = () => {
                 </div>
 
                 <CardContent className="p-4">
-                  <h3 className="font-bold text-lg mb-2">{item.name}</h3>
+                  <h3 className="font-bold text-lg mb-1">{item.name}</h3>
+                  
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground mb-2">
+                    <Timer className="h-3 w-3" />
+                    <span>{item.prepTime} mins</span>
+                  </div>
 
                   <div className="flex items-center justify-between mb-2">
                     <div className="text-2xl font-black text-primary">
@@ -586,6 +609,10 @@ const MenuPage = () => {
                   alt={selectedItem.name}
                   className="w-full h-full object-cover"
                 />
+                <div className="absolute bottom-2 right-2 bg-background/90 backdrop-blur px-2 py-1 rounded-full flex items-center gap-1 text-xs font-medium">
+                  <Timer className="h-3 w-3 text-primary" />
+                  <span>{selectedItem.prepTime} mins</span>
+                </div>
               </div>
 
               <div className="space-y-3">
