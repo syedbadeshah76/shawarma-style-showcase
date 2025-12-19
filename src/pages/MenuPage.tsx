@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
 import { ShoppingCart, ChevronDown, ChevronUp, Eye, Leaf, Flame, Star, Search, Clock, X, ArrowUpDown, Minus, Plus } from "lucide-react";
@@ -241,6 +242,7 @@ const MenuPage = () => {
   const [recentlyViewed, setRecentlyViewed] = useState<typeof menuItems>([]);
   const [sortOption, setSortOption] = useState<string>("default");
   const [quantity, setQuantity] = useState(1);
+  const [specialInstructions, setSpecialInstructions] = useState("");
 
   const minPrice = 0;
   const maxPrice = 150;
@@ -303,11 +305,12 @@ const MenuPage = () => {
 
   const visibleItems = showAll ? sortedItems : sortedItems.slice(0, 12);
 
-  const handleAddToCart = (item, qty: number = 1) => {
-    addItem(item, qty);
+  const handleAddToCart = (item, qty: number = 1, instructions: string = "") => {
+    addItem(item, qty, instructions || undefined);
     setAddedItemName(item.name);
     setShowDialog(true);
-    setQuantity(1); // Reset quantity after adding
+    setQuantity(1);
+    setSpecialInstructions("");
   };
 
   const handleViewCart = () => {
@@ -566,7 +569,7 @@ const MenuPage = () => {
         </AlertDialogContent>
       </AlertDialog>
 
-      <Dialog open={!!selectedItem} onOpenChange={(open) => { if (!open) { setSelectedItem(null); setQuantity(1); } }}>
+      <Dialog open={!!selectedItem} onOpenChange={(open) => { if (!open) { setSelectedItem(null); setQuantity(1); setSpecialInstructions(""); } }}>
         <DialogContent className="w-[95vw] max-w-2xl mx-auto p-4 sm:p-6">
           {selectedItem && (
             <div className="flex flex-col gap-4">
@@ -627,6 +630,23 @@ const MenuPage = () => {
               </div>
 
               <div className="flex flex-col gap-3 pt-3 border-t mt-2">
+                {/* Special Instructions */}
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-1.5 block">
+                    Special Instructions (optional)
+                  </label>
+                  <Textarea
+                    placeholder="E.g., No onions, extra spicy, allergies..."
+                    value={specialInstructions}
+                    onChange={(e) => setSpecialInstructions(e.target.value)}
+                    className="resize-none h-16 text-sm bg-background/50"
+                    maxLength={200}
+                  />
+                  <p className="text-xs text-muted-foreground mt-1 text-right">
+                    {specialInstructions.length}/200
+                  </p>
+                </div>
+
                 {/* Quantity Selector */}
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-foreground">Quantity</span>
@@ -660,7 +680,7 @@ const MenuPage = () => {
                   <Button
                     className="flex-1 bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow h-10 sm:h-11"
                     onClick={() => {
-                      handleAddToCart(selectedItem, quantity);
+                      handleAddToCart(selectedItem, quantity, specialInstructions);
                       setSelectedItem(null);
                     }}
                   >
