@@ -4,7 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
-import { ShoppingCart, ChevronDown, ChevronUp, Eye, Leaf, Flame, Star, Search, Clock, X } from "lucide-react";
+import { ShoppingCart, ChevronDown, ChevronUp, Eye, Leaf, Flame, Star, Search, Clock, X, ArrowUpDown } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -232,6 +239,7 @@ const MenuPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [priceRange, setPriceRange] = useState<number[]>([0, 150]);
   const [recentlyViewed, setRecentlyViewed] = useState<typeof menuItems>([]);
+  const [sortOption, setSortOption] = useState<string>("default");
 
   const minPrice = 0;
   const maxPrice = 150;
@@ -279,7 +287,20 @@ const MenuPage = () => {
     return matchesSearch && matchesPrice;
   });
 
-  const visibleItems = showAll ? filteredItems : filteredItems.slice(0, 12);
+  const sortedItems = [...filteredItems].sort((a, b) => {
+    switch (sortOption) {
+      case "price-low":
+        return a.price - b.price;
+      case "price-high":
+        return b.price - a.price;
+      case "name-az":
+        return a.name.localeCompare(b.name);
+      default:
+        return 0;
+    }
+  });
+
+  const visibleItems = showAll ? sortedItems : sortedItems.slice(0, 12);
 
   const handleAddToCart = (item) => {
     addItem(item);
@@ -370,7 +391,23 @@ const MenuPage = () => {
             </div>
           </div>
 
-          {/* RECENTLY VIEWED SECTION */}
+          {/* SORT OPTIONS */}
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
+            <span className="text-sm font-medium text-foreground">Sort by:</span>
+            <Select value={sortOption} onValueChange={setSortOption}>
+              <SelectTrigger className="w-48 bg-card/50 backdrop-blur border-border/50">
+                <SelectValue placeholder="Default" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="default">Default</SelectItem>
+                <SelectItem value="price-low">Price: Low to High</SelectItem>
+                <SelectItem value="price-high">Price: High to Low</SelectItem>
+                <SelectItem value="name-az">Name: A to Z</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
           {recentlyViewed.length > 0 && (
             <div className="mb-10">
               <div className="flex items-center justify-between mb-4">
