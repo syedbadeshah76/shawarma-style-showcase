@@ -5,11 +5,12 @@ export interface CartItem {
   price: number;
   quantity: number;
   image: string;
+  specialInstructions?: string;
 }
 
 interface CartContextType {
   items: CartItem[];
-  addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
+  addItem: (item: Omit<CartItem, "quantity">, quantity?: number, specialInstructions?: string) => void;
   removeItem: (name: string) => void;
   updateQuantity: (name: string, quantity: number) => void;
   clearCart: () => void;
@@ -28,15 +29,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [notes, setNotes] = useState<string>("");
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const addItem = (item: Omit<CartItem, "quantity">, quantity: number = 1) => {
+  const addItem = (item: Omit<CartItem, "quantity">, quantity: number = 1, specialInstructions?: string) => {
     setItems((prev) => {
-      const existingItem = prev.find((i) => i.name === item.name);
+      const existingItem = prev.find((i) => i.name === item.name && i.specialInstructions === specialInstructions);
       if (existingItem) {
         return prev.map((i) =>
-          i.name === item.name ? { ...i, quantity: i.quantity + quantity } : i
+          i.name === item.name && i.specialInstructions === specialInstructions 
+            ? { ...i, quantity: i.quantity + quantity } 
+            : i
         );
       }
-      return [...prev, { ...item, quantity }];
+      return [...prev, { ...item, quantity, specialInstructions }];
     });
   };
 

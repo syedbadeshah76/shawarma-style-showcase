@@ -13,7 +13,10 @@ const Cart = () => {
     if (items.length === 0) return;
 
     const orderMessage = items
-      .map((item) => `${item.name} x${item.quantity} - ₹${item.price * item.quantity}`)
+      .map((item) => {
+        const itemLine = `${item.name} x${item.quantity} - ₹${item.price * item.quantity}`;
+        return item.specialInstructions ? `${itemLine}%0A   → ${encodeURIComponent(item.specialInstructions)}` : itemLine;
+      })
       .join("%0A");
     
     const totalMessage = `%0A%0ATotal: ₹${total}`;
@@ -49,9 +52,9 @@ const Cart = () => {
             </div>
           ) : (
             <>
-              {items.map((item) => (
+              {items.map((item, index) => (
                 <div
-                  key={item.name}
+                  key={`${item.name}-${item.specialInstructions || index}`}
                   className="flex gap-4 p-4 bg-muted rounded-lg"
                 >
                   <img
@@ -62,6 +65,11 @@ const Cart = () => {
                   <div className="flex-1">
                     <h3 className="font-bold text-foreground">{item.name}</h3>
                     <p className="text-primary font-bold">₹{item.price}</p>
+                    {item.specialInstructions && (
+                      <p className="text-xs text-muted-foreground mt-1 italic">
+                        "{item.specialInstructions}"
+                      </p>
+                    )}
                     
                     <div className="flex items-center gap-2 mt-2">
                       <Button
