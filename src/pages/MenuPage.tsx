@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
-import { ShoppingCart, ChevronDown, ChevronUp, Eye, Leaf, Flame, Star, Search, Clock, X, ArrowUpDown } from "lucide-react";
+import { ShoppingCart, ChevronDown, ChevronUp, Eye, Leaf, Flame, Star, Search, Clock, X, ArrowUpDown, Minus, Plus } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -240,6 +240,7 @@ const MenuPage = () => {
   const [priceRange, setPriceRange] = useState<number[]>([0, 150]);
   const [recentlyViewed, setRecentlyViewed] = useState<typeof menuItems>([]);
   const [sortOption, setSortOption] = useState<string>("default");
+  const [quantity, setQuantity] = useState(1);
 
   const minPrice = 0;
   const maxPrice = 150;
@@ -302,10 +303,11 @@ const MenuPage = () => {
 
   const visibleItems = showAll ? sortedItems : sortedItems.slice(0, 12);
 
-  const handleAddToCart = (item) => {
-    addItem(item);
+  const handleAddToCart = (item, qty: number = 1) => {
+    addItem(item, qty);
     setAddedItemName(item.name);
     setShowDialog(true);
+    setQuantity(1); // Reset quantity after adding
   };
 
   const handleViewCart = () => {
@@ -564,7 +566,7 @@ const MenuPage = () => {
         </AlertDialogContent>
       </AlertDialog>
 
-      <Dialog open={!!selectedItem} onOpenChange={() => setSelectedItem(null)}>
+      <Dialog open={!!selectedItem} onOpenChange={(open) => { if (!open) { setSelectedItem(null); setQuantity(1); } }}>
         <DialogContent className="w-[95vw] max-w-2xl mx-auto p-4 sm:p-6">
           {selectedItem && (
             <div className="flex flex-col gap-4">
@@ -624,18 +626,48 @@ const MenuPage = () => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 pt-3 border-t mt-2">
-                <div className="text-xl sm:text-2xl font-black text-primary">₹{selectedItem.price}</div>
-                <Button
-                  className="flex-1 bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow h-10 sm:h-11"
-                  onClick={() => {
-                    handleAddToCart(selectedItem);
-                    setSelectedItem(null);
-                  }}
-                >
-                  <ShoppingCart className="mr-2 h-4 w-4" />
-                  Add to Cart
-                </Button>
+              <div className="flex flex-col gap-3 pt-3 border-t mt-2">
+                {/* Quantity Selector */}
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-foreground">Quantity</span>
+                  <div className="flex items-center gap-3">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      disabled={quantity <= 1}
+                    >
+                      <Minus className="h-4 w-4" />
+                    </Button>
+                    <span className="w-8 text-center font-bold text-lg">{quantity}</span>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={() => setQuantity(quantity + 1)}
+                    >
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Price & Add to Cart */}
+                <div className="flex items-center gap-3">
+                  <div className="text-xl sm:text-2xl font-black text-primary">
+                    ₹{selectedItem.price * quantity}
+                  </div>
+                  <Button
+                    className="flex-1 bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow h-10 sm:h-11"
+                    onClick={() => {
+                      handleAddToCart(selectedItem, quantity);
+                      setSelectedItem(null);
+                    }}
+                  >
+                    <ShoppingCart className="mr-2 h-4 w-4" />
+                    Add {quantity > 1 ? `${quantity} items` : 'to Cart'}
+                  </Button>
+                </div>
               </div>
             </div>
           )}
