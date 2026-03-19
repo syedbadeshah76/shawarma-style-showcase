@@ -5,6 +5,11 @@ import fries from "@/assets/fries.jpg";
 import wrap from "@/assets/wrap.jpg";
 import broasted from "@/assets/broasted.jpg";
 import momos from "@/assets/momos.jpg";
+import pizza from "@/assets/pizza-generated.jpg";
+import coffee from "@/assets/coffee-generated.jpg";
+import mocktail from "@/assets/mocktail-generated.jpg";
+import mayonnaise from "@/assets/mayonnaise-generated.jpg";
+import rumaliRoti from "@/assets/rumali-roti-generated.jpg";
 
 export type MenuItem = {
   name: string;
@@ -168,7 +173,7 @@ export const menuItems: MenuItem[] = [
   {
     name: "Pizza",
     price: 80,
-    image: burger,
+    image: pizza,
     isVegetarian: true,
     isSpicy: false,
     prepTime: "15-20",
@@ -201,7 +206,7 @@ export const menuItems: MenuItem[] = [
   {
     name: "Rumali Roti",
     price: 10,
-    image: shawarmaMain,
+    image: rumaliRoti,
     isVegetarian: true,
     isSpicy: false,
     prepTime: "2-3",
@@ -212,7 +217,7 @@ export const menuItems: MenuItem[] = [
   {
     name: "Coffee",
     price: 20,
-    image: fries,
+    image: coffee,
     isVegetarian: true,
     isSpicy: false,
     prepTime: "3-5",
@@ -223,7 +228,7 @@ export const menuItems: MenuItem[] = [
   {
     name: "Mocktails Juice",
     price: 60,
-    image: fries,
+    image: mocktail,
     isVegetarian: true,
     isSpicy: false,
     prepTime: "5-7",
@@ -234,7 +239,7 @@ export const menuItems: MenuItem[] = [
   {
     name: "Mayonnaise",
     price: 20,
-    image: fries,
+    image: mayonnaise,
     isVegetarian: true,
     isSpicy: false,
     prepTime: "1-2",
@@ -242,20 +247,7 @@ export const menuItems: MenuItem[] = [
     ingredients: "Eggs, Oil, Vinegar, Salt, Sugar",
     nutrition: { calories: 180, protein: "1g", carbs: "2g", fat: "20g" },
   },
-].map((item) => {
-  let image = item.image;
-  const lowerName = item.name.toLowerCase();
-
-  if (lowerName.includes("shawarma") || lowerName.includes("rumali roti")) image = shawarmaMain;
-  else if (lowerName.includes("mini") && lowerName.includes("shawarma")) image = miniShawarma;
-  else if (lowerName.includes("wrap") || lowerName.includes("roll")) image = wrap;
-  else if (lowerName.includes("burger") || lowerName.includes("sandwich")) image = burger;
-  else if (lowerName.includes("fries") || lowerName.includes("coffee") || lowerName.includes("mocktails") || lowerName.includes("mayonnaise")) image = fries;
-  else if (lowerName.includes("broasted") || lowerName.includes("nuggets")) image = broasted;
-  else if (lowerName.includes("momos")) image = momos;
-
-  return { ...item, image };
-});
+];
 
 export const comboDeals: ComboDeal[] = [
   {
