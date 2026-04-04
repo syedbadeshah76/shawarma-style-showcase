@@ -125,20 +125,20 @@ const Cart = () => {
               <span className="text-xl font-bold">Total:</span>
               <span className="text-2xl font-black text-primary">₹{total}</span>
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-2">
               <Button
-                className="flex-1 bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow"
+                className="flex-1 bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow text-sm"
                 size="lg"
                 onClick={handleOrderNow}
               >
                 Order via WhatsApp
               </Button>
               <Button
-                className="flex-1 bg-[#fc8019] hover:bg-[#e87011] text-white"
+                className="flex-1 bg-[#fc8019] hover:bg-[#e87011] text-white text-sm"
                 size="lg"
                 onClick={() => window.open(SWIGGY_RESTAURANT_URL, "_blank")}
               >
-                <ExternalLink className="h-4 w-4 mr-2" />
+                <ExternalLink className="h-4 w-4 mr-1" />
                 Order on Swiggy
               </Button>
             </div>
