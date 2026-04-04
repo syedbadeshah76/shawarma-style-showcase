@@ -125,13 +125,23 @@ const Cart = () => {
               <span className="text-xl font-bold">Total:</span>
               <span className="text-2xl font-black text-primary">₹{total}</span>
             </div>
-            <Button
-              className="w-full bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow"
-              size="lg"
-              onClick={handleOrderNow}
-            >
-              Order Now via WhatsApp
-            </Button>
+            <div className="flex gap-3">
+              <Button
+                className="flex-1 bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow"
+                size="lg"
+                onClick={handleOrderNow}
+              >
+                Order via WhatsApp
+              </Button>
+              <Button
+                className="flex-1 bg-[#fc8019] hover:bg-[#e87011] text-white"
+                size="lg"
+                onClick={() => window.open(SWIGGY_RESTAURANT_URL, "_blank")}
+              >
+                <ExternalLink className="h-4 w-4 mr-2" />
+                Order on Swiggy
+              </Button>
+            </div>
           </div>
         )}
       </SheetContent>
