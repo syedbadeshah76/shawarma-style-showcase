@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { comboDeals, FAVORITES_STORAGE_KEY, menuItems, menuCategories, SWIGGY_RESTAURANT_URL, type ComboDeal, type MenuItem } from "@/data/menuData";
+import SwiggyButton from "@/components/SwiggyButton";
 
 const Menu = () => {
   const { addItem, setIsCartOpen } = useCart();
