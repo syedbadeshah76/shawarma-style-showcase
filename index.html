@@ -4,51 +4,54 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- 🔥 High-Performance SEO Title -->
-    <title>AL-SHA SHAWARMA | Best Chicken Shawarma in Hyderabad – Fresh & Juicy</title>
-
-    <!-- 🔥 Highly Optimized SEO Description -->
-    <meta name="description" content="AL-SHA SHAWARMA serves the best chicken shawarma in Hyderabad. Fresh, juicy, affordable shawarmas, burgers, wraps, broasted, fries & more. Visit or order now!" />
-
-    <!-- 🔥 Strong Keywords to Rank for 'shawarma', 'chicken shawarma', 'best shawarma' -->
-    <meta name="keywords" content="best shawarma, shawarma near me, chicken shawarma, hyderabad shawarma, rumali roti shawarma, mini shawarma, broasted chicken, al sha shawarma, shawarma barkas" />
-
+    <!-- Sitewide fallback title (per-route overrides via react-helmet-async) -->
+    <title>AL-SHA SHAWARMA | Best Shawarma in Hyderabad</title>
+    <meta name="description" content="AL-SHA SHAWARMA serves the best chicken shawarma in Hyderabad. Fresh, juicy, affordable shawarmas, burgers, wraps, broasted, fries & more." />
+    <meta name="keywords" content="best shawarma, shawarma near me, chicken shawarma, hyderabad shawarma, rumali roti shawarma, broasted chicken, al sha shawarma" />
     <meta name="author" content="AL-SHA SHAWARMA" />
 
-    <!-- 🔥 Open Graph for Facebook / WhatsApp Preview -->
-    <meta property="og:title" content="AL-SHA SHAWARMA – Best Chicken Shawarma in Hyderabad" />
+    <!-- Open Graph (sitewide fallback for non-JS social crawlers) -->
+    <meta property="og:title" content="AL-SHA SHAWARMA – Best Shawarma in Hyderabad" />
     <meta property="og:description" content="Serving Fresh & Juicy Shawarmas, Wraps, Burgers, Fries & More. Taste the real authentic flavour!" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/shawarma-og.jpg" />
-    <meta property="og:url" content="https://alshashawarma.com" />
+    <meta property="og:image" content="https://alshahshawarma.lovable.app/shawarma-og.jpg" />
+    <meta property="og:url" content="https://alshahshawarma.lovable.app/" />
 
-    <!-- 🔥 Twitter Card SEO -->
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="AL-SHA SHAWARMA – Best Shawarma in Hyderabad" />
     <meta name="twitter:description" content="Fresh, Juicy, and Loaded with Flavour. Try our best-selling Shawarma today!" />
-    <meta name="twitter:image" content="/shawarma-og.jpg" />
+    <meta name="twitter:image" content="https://alshahshawarma.lovable.app/shawarma-og.jpg" />
 
-    <!-- 🔥 Local Business SEO (Google LOVES This) -->
+    <!-- Local Business Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Restaurant",
       "name": "AL-SHA SHAWARMA",
-      "image": "/shawarma-og.jpg",
+      "image": "https://alshahshawarma.lovable.app/shawarma-og.jpg",
       "servesCuisine": ["Shawarma", "Arabian", "Fast Food"],
       "priceRange": "₹",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "Tappachabutra Road, opposite Naseeb Hotel",
         "addressLocality": "Hyderabad",
         "addressRegion": "Telangana",
+        "postalCode": "500006",
         "addressCountry": "IN"
       },
-      "telephone": "",
-      "url": "https://alshashawarma.com"
+      "telephone": "+91 88558 88965",
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "11:00",
+        "closes": "23:00"
+      }],
+      "url": "https://alshahshawarma.lovable.app"
     }
     </script>
 
-    <!-- 🔥 Fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">

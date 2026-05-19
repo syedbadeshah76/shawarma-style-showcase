@@ -187,7 +187,8 @@ const ContactPage = () => {
                 <CardContent className="p-0">
                   <div className="w-full h-[300px]">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28954.776390778872!2d78.4481416!3d17.3756871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb970011a9fdd3%3A0x9f96e063ffbecb41!2sAL%20SHAH%20SHAWARMA!5e1!3m2!1sen!2sin!4v1764238607566!5m2!1sen!2sin" 
+                      title="AL-SHA SHAWARMA location on Google Maps"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28954.776390778872!2d78.4481416!3d17.3756871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb970011a9fdd3%3A0x9f96e063ffbecb41!2sAL%20SHAH%20SHAWARMA!5e1!3m2!1sen!2sin!4v1764238607566!5m2!1sen!2sin"
                       width="100%"
                       height="100%"
                       style={{ border: 0 }}
