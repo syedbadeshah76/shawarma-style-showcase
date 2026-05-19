@@ -304,14 +304,23 @@ const Menu = () => {
                     </Button>
                   </div>
 
-                  <Button
-                    size="sm"
-                    className="w-full h-10 sm:h-9 text-xs sm:text-sm bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow active:scale-95 transition-transform"
-                    onClick={() => handleAddToCart(item)}
-                  >
-                    <ShoppingCart className="mr-1 h-4 w-4" />
-                    Add to Cart
-                  </Button>
+                  <div className="flex gap-1.5">
+                    <Button
+                      size="sm"
+                      className="flex-1 h-10 sm:h-9 text-xs sm:text-sm bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow active:scale-95 transition-transform"
+                      onClick={() => handleAddToCart(item)}
+                    >
+                      <ShoppingCart className="mr-1 h-4 w-4" />
+                      Add
+                    </Button>
+                    <SwiggyButton
+                      itemName={item.name}
+                      variant="compact"
+                      showIcon={false}
+                      label="🛵 Swiggy"
+                      className="flex-1 h-10 sm:h-9 text-xs sm:text-sm"
+                    />
+                  </div>
                 </CardContent>
               </Card>
             );
