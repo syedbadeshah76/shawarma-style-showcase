@@ -3,6 +3,8 @@ import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Cart from "@/components/Cart";
+import SwiggyButton from "@/components/SwiggyButton";
+import { BUSINESS_PHONE } from "@/data/menuData";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -43,7 +45,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3 lg:space-x-4">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -54,11 +56,12 @@ const Navbar = () => {
               </Link>
             ))}
             <Cart />
-            <Button 
+            <SwiggyButton size="default" />
+            <Button
               className="bg-primary hover:bg-primary-hover text-primary-foreground shadow-glow"
               asChild
             >
-              <a href="tel:+919876543210">
+              <a href={`tel:${BUSINESS_PHONE}`}>
                 <Phone className="mr-2 h-4 w-4" />
                 Order Now
               </a>
@@ -92,16 +95,17 @@ const Navbar = () => {
                 <div className="flex-1">
                   <Cart />
                 </div>
-                <Button 
-                  className="bg-primary hover:bg-primary-hover text-primary-foreground flex-1 shadow-glow"
-                  asChild
-                >
-                  <a href="tel:+919876543210">
-                    <Phone className="mr-2 h-4 w-4" />
-                    Order Now
-                  </a>
-                </Button>
+                <SwiggyButton size="default" className="flex-1" />
               </div>
+              <Button
+                className="w-full bg-primary hover:bg-primary-hover text-primary-foreground shadow-glow"
+                asChild
+              >
+                <a href={`tel:${BUSINESS_PHONE}`}>
+                  <Phone className="mr-2 h-4 w-4" />
+                  Order Now
+                </a>
+              </Button>
             </div>
           </div>
         )}

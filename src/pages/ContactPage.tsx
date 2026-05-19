@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SwiggyButton from "@/components/SwiggyButton";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +8,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Phone, MapPin, Clock, Mail, MessageCircle, Send } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import {
+  BUSINESS_EMAIL,
+  BUSINESS_PHONE,
+  BUSINESS_PHONE_DISPLAY,
+  BUSINESS_WHATSAPP,
+} from "@/data/menuData";
 
 const ContactPage = () => {
   const { toast } = useToast();
@@ -20,7 +27,7 @@ const ContactPage = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const whatsappMessage = `Hi AL-SHA SHAWARMA!%0A%0AName: ${formData.name}%0AEmail: ${formData.email}%0APhone: ${formData.phone}%0AMessage: ${formData.message}`;
-    window.open(`https://wa.me/919876543210?text=${whatsappMessage}`, '_blank');
+    window.open(`https://wa.me/${BUSINESS_WHATSAPP}?text=${whatsappMessage}`, '_blank');
     toast({
       title: "Message sent!",
       description: "We'll get back to you soon via WhatsApp.",
@@ -54,8 +61,8 @@ const ContactPage = () => {
                   <div>
                     <h3 className="font-bold text-lg mb-1">Call Us</h3>
                     <p className="text-muted-foreground mb-2">Get in touch with us</p>
-                    <a href="tel:+919876543210" className="text-primary hover:text-primary-hover font-medium">
-                      +91 98765 43210
+                    <a href={`tel:${BUSINESS_PHONE}`} className="text-primary hover:text-primary-hover font-medium">
+                      {BUSINESS_PHONE_DISPLAY}
                     </a>
                   </div>
                 </CardContent>
@@ -99,32 +106,33 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg mb-1">Email Us</h3>
-                    <a href="mailto:info@alshashawarma.com" className="text-primary hover:text-primary-hover">
-                      info@alshashawarma.com
+                    <a href={`mailto:${BUSINESS_EMAIL}`} className="text-primary hover:text-primary-hover">
+                      {BUSINESS_EMAIL}
                     </a>
                   </div>
                 </CardContent>
               </Card>
 
-              <div className="flex gap-4">
-                <Button 
-                  className="flex-1 bg-primary hover:bg-primary-hover text-primary-foreground shadow-glow"
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <Button
+                  className="bg-primary hover:bg-primary-hover text-primary-foreground shadow-glow"
                   asChild
                 >
-                  <a href="tel:+919876543210">
+                  <a href={`tel:${BUSINESS_PHONE}`}>
                     <Phone className="mr-2" size={20} />
                     Call Now
                   </a>
                 </Button>
-                <Button 
-                  className="flex-1 bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow"
+                <Button
+                  className="bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow"
                   asChild
                 >
-                  <a href="https://wa.me/919876543210?text=Hi%20AL-SHA%20SHAWARMA!%20I%20would%20like%20to%20place%20an%20order" target="_blank" rel="noopener noreferrer">
+                  <a href={`https://wa.me/${BUSINESS_WHATSAPP}?text=Hi%20AL-SHA%20SHAWARMA!%20I%20would%20like%20to%20place%20an%20order`} target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="mr-2" size={20} />
                     WhatsApp
                   </a>
                 </Button>
+                <SwiggyButton size="default" label="Swiggy" />
               </div>
             </div>
 
