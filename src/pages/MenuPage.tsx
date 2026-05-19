@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -288,6 +289,11 @@ const MenuPage = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Menu | AL-SHA SHAWARMA Hyderabad"
+        description="Browse the full AL-SHA SHAWARMA menu: chicken shawarma, wraps, burgers, broasted, momos, combos & drinks. Search, filter and order online."
+        path="/menu"
+      />
       <Navbar />
 
       <section className="pt-28 md:pt-32 pb-16 md:pb-20 bg-muted">
