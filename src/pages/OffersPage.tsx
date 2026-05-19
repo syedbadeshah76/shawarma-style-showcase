@@ -75,6 +75,11 @@ const offers = [
 const OffersPage = () => {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Offers & Combo Deals | AL-SHA SHAWARMA"
+        description="Save more with limited-time shawarma combos and meal deals at AL-SHA SHAWARMA Hyderabad. Burger combos, wrap bundles, and broasted feasts."
+        path="/offers"
+      />
       <Navbar />
       
       <section className="pt-32 pb-20 bg-gradient-to-b from-background to-muted">

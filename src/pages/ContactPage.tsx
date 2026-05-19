@@ -37,6 +37,11 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Contact AL-SHA SHAWARMA | Hyderabad Location & Phone"
+        description="Visit AL-SHA SHAWARMA on Tappachabutra Road, opposite Naseeb Hotel, Hyderabad. Call +91 88558 88965 or message us on WhatsApp."
+        path="/contact"
+      />
       <Navbar />
       
       <section className="pt-32 pb-20 bg-background">

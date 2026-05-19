@@ -34,6 +34,11 @@ const GalleryPage = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Gallery | AL-SHA SHAWARMA Hyderabad"
+        description="Photos of our chicken shawarmas, wraps, burgers, broasted chicken and shop atmosphere at AL-SHA SHAWARMA, Hyderabad."
+        path="/gallery"
+      />
       <Navbar />
       
       <section className="pt-32 pb-20 bg-background">
