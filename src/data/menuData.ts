@@ -51,7 +51,15 @@ export type ComboDeal = {
 export const FAVORITES_STORAGE_KEY = "favoriteMenuItems";
 export const RECENTLY_VIEWED_STORAGE_KEY = "recentlyViewedItems";
 
-export const SWIGGY_RESTAURANT_URL = "https://www.swiggy.com";
+// Contact & ordering channels — update with your real business info
+export const SWIGGY_RESTAURANT_URL = "https://www.swiggy.com/search?query=al%20shah%20shawarma";
+export const BUSINESS_PHONE = "+918855888965";
+export const BUSINESS_PHONE_DISPLAY = "+91 88558 88965";
+export const BUSINESS_EMAIL = "info@alshahshawarma.com";
+export const BUSINESS_WHATSAPP = "918855888965";
+
+export const swiggySearchUrl = (itemName: string) =>
+  `https://www.swiggy.com/search?query=${encodeURIComponent(itemName)}`;
 
 export const menuCategories: { id: MenuCategory; label: string; emoji: string }[] = [
   { id: "shawarma", label: "Shawarma", emoji: "🌯" },
