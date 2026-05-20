@@ -22,7 +22,7 @@ const Cart = () => {
     
     const totalMessage = `%0A%0ATotal: ₹${total}`;
     const notesMessage = notes.trim() ? `%0A%0ASpecial Instructions:%0A${encodeURIComponent(notes)}` : "";
-    const whatsappUrl = `https://wa.me/918855888965?text=Hi!%20I%20want%20to%20order:%0A%0A${orderMessage}${totalMessage}${notesMessage}`;
+    const whatsappUrl = `https://wa.me/${BUSINESS_WHATSAPP}?text=Hi!%20I%20want%20to%20order:%0A%0A${orderMessage}${totalMessage}${notesMessage}`;
     
     window.open(whatsappUrl, "_blank");
     clearCart();
