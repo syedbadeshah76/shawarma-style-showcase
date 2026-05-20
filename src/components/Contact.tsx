@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Phone, MapPin, Clock, Mail, MessageCircle } from "lucide-react";
+import { BUSINESS_EMAIL, BUSINESS_PHONE, BUSINESS_PHONE_DISPLAY, BUSINESS_WHATSAPP } from "@/data/menuData";
 
 const Contact = () => {
   return (
