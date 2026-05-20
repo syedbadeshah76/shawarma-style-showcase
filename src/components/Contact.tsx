@@ -93,7 +93,7 @@ const Contact = () => {
                 className="flex-1 bg-secondary hover:bg-secondary-hover text-secondary-foreground shadow-glow-yellow"
                 asChild
               >
-                <a href="https://wa.me/919876543210?text=Hi%20AL-SHA%20SHAWARMA!%20I%20would%20like%20to%20place%20an%20order" target="_blank" rel="noopener noreferrer">
+                <a href={`https://wa.me/${BUSINESS_WHATSAPP}?text=Hi%20AL-SHA%20SHAWARMA!%20I%20would%20like%20to%20place%20an%20order`} target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="mr-2" size={20} />
                   WhatsApp
                 </a>
