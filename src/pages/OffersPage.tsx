@@ -9,6 +9,8 @@ import wrap from "@/assets/wrap.jpg";
 import burger from "@/assets/burger.jpg";
 import broasted from "@/assets/broasted.jpg";
 import fries from "@/assets/fries.jpg";
+import { BUSINESS_WHATSAPP } from "@/data/menuData";
+
 
 const offers = [
   {
@@ -157,7 +159,7 @@ const OffersPage = () => {
                       asChild
                     >
                       <a 
-                        href={`https://wa.me/919876543210?text=Hi!%20I%20want%20to%20order%20the%20${encodeURIComponent(offer.title)}`} 
+                        href={`https://wa.me/${BUSINESS_WHATSAPP}?text=Hi!%20I%20want%20to%20order%20the%20${encodeURIComponent(offer.title)}`} 
                         target="_blank" 
                         rel="noopener noreferrer"
                       >

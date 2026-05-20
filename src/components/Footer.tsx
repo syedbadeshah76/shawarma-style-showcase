@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { BUSINESS_EMAIL, BUSINESS_PHONE, BUSINESS_PHONE_DISPLAY } from "@/data/menuData";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -50,8 +51,8 @@ const Footer = () => {
             <ul className="space-y-2 text-accent-foreground/80">
               <li>Tappachabutra opp Naseeb Hotel </li>
               <li>HYDERABAD, INDIA (500006)</li>
-              <li>+91 98765 43210</li>
-              <li>info@alshashawarma.com</li>
+              <li><a href={`tel:${BUSINESS_PHONE}`} className="hover:text-primary transition-colors">{BUSINESS_PHONE_DISPLAY}</a></li>
+              <li><a href={`mailto:${BUSINESS_EMAIL}`} className="hover:text-primary transition-colors">{BUSINESS_EMAIL}</a></li>
             </ul>
           </div>
         </div>

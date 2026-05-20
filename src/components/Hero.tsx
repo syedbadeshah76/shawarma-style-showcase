@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Award, Leaf, Shield } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import { BUSINESS_PHONE } from "@/data/menuData";
 
 const Hero = () => {
   return (
@@ -38,7 +39,7 @@ const Hero = () => {
               className="bg-primary hover:bg-primary-hover text-primary-foreground text-lg px-8 py-6 shadow-glow hover:shadow-glow transition-all duration-300 hover:scale-105"
               asChild
             >
-              <a href="tel:+919876543210">
+              <a href={`tel:${BUSINESS_PHONE}`}>
                 Order Now
               </a>
             </Button>
