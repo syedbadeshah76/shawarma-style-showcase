@@ -98,7 +98,7 @@ const Offers = () => {
                     className="w-full bg-primary hover:bg-primary-hover text-primary-foreground shadow-glow"
                     asChild
                   >
-                    <a href="https://wa.me/919876543210?text=Hi!%20I%20want%20to%20order%20the%20{offer.title}" target="_blank" rel="noopener noreferrer">
+                    <a href={`https://wa.me/${BUSINESS_WHATSAPP}?text=Hi!%20I%20want%20to%20order%20the%20${encodeURIComponent(offer.title)}`} target="_blank" rel="noopener noreferrer">
                       Order Now
                     </a>
                   </Button>
