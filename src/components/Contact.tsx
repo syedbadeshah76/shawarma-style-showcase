@@ -27,8 +27,8 @@ const Contact = () => {
                 <div>
                   <h3 className="font-bold text-lg mb-1">Call Us</h3>
                   <p className="text-muted-foreground mb-2">Get in touch with us</p>
-                  <a href="tel:+919876543210" className="text-primary hover:text-primary-hover font-medium">
-                    +91 98765 43210
+                  <a href={`tel:${BUSINESS_PHONE}`} className="text-primary hover:text-primary-hover font-medium">
+                    {BUSINESS_PHONE_DISPLAY}
                   </a>
                 </div>
               </CardContent>
