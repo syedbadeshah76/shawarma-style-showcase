@@ -84,7 +84,7 @@ const Contact = () => {
                 className="flex-1 bg-primary hover:bg-primary-hover text-primary-foreground shadow-glow"
                 asChild
               >
-                <a href="tel:+919876543210">
+                <a href={`tel:${BUSINESS_PHONE}`}>
                   <Phone className="mr-2" size={20} />
                   Call Now
                 </a>
