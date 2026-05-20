@@ -4,6 +4,7 @@ import { Flame, Sparkles, Tag } from "lucide-react";
 import shawarmaMain from "@/assets/shawarma-main.jpg";
 import wrap from "@/assets/wrap.jpg";
 import combo from "@/assets/burger.jpg";
+import { BUSINESS_WHATSAPP } from "@/data/menuData";
 
 const Offers = () => {
   const offers = [
