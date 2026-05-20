@@ -1,7 +1,7 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Trash2, Plus, Minus, ExternalLink } from "lucide-react";
-import { SWIGGY_RESTAURANT_URL } from "@/data/menuData";
+import { SWIGGY_RESTAURANT_URL, BUSINESS_WHATSAPP } from "@/data/menuData";
 import { useCart } from "@/contexts/CartContext";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
