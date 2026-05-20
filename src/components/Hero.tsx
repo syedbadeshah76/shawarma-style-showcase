@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Award, Leaf, Shield } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import { BUSINESS_PHONE } from "@/data/menuData";
 
 const Hero = () => {
   return (
