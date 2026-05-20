@@ -72,8 +72,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-1">Email Us</h3>
-                  <a href="mailto:info@alshashawarma.com" className="text-primary hover:text-primary-hover">
-                    info@alshashawarma.com
+                  <a href={`mailto:${BUSINESS_EMAIL}`} className="text-primary hover:text-primary-hover">
+                    {BUSINESS_EMAIL}
                   </a>
                 </div>
               </CardContent>
