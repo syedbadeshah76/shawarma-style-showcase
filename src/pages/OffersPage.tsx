@@ -9,6 +9,8 @@ import wrap from "@/assets/wrap.jpg";
 import burger from "@/assets/burger.jpg";
 import broasted from "@/assets/broasted.jpg";
 import fries from "@/assets/fries.jpg";
+import { BUSINESS_WHATSAPP } from "@/data/menuData";
+
 
 const offers = [
   {
